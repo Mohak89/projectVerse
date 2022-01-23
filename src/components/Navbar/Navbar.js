@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 // import Features from "../Features/Feature";
 import styles from '../../styles/NavBar.module.scss'
 import Projects from "../Projetcs/Project";
+import CreateProject from "../Projetcs/createProject";
 // import LoginSignup from "../LoginSignup/AuthPage";
 // import Signup from '../LoginSignup/Signup'
 // import Login from "../LoginSignup/Login";
@@ -57,9 +58,9 @@ const NavBar = () => {
     }, [width])
     const links = [
         { to: '/', title: 'Home', component: '', key: uuidv4() },
-        { to: '/explore', title: 'Explore', component: <Projects/>, key: uuidv4() },
+        { to: '/explore', title: 'Explore', component: <Projects />, key: uuidv4() },
         { to: '/profile', title: 'Profile', component: '', key: uuidv4() },
-        { to: '/create', title: 'Create', component: '', key: uuidv4() }
+        { to: '/create', title: 'Create', component: <CreateProject />, key: uuidv4() }
     ]
     function getClass() {
         if (!isMobile) {
@@ -89,13 +90,11 @@ const NavBar = () => {
                 </div>
 
             </div>
-            <div className={styles.container}>
-                <Routes>
-                    {links.map(link => {
-                        return <Route exact path={link.to} key={link.key} element={link.component} />
-                    })}
-                </Routes>
-            </div>
+            <Routes>
+                {links.map(link => {
+                    return <Route exact path={link.to} key={link.key} element={link.component} />
+                })}
+            </Routes>
         </Router>
     )
 }
