@@ -1,7 +1,12 @@
-#root{
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+
+#root {
   width: 95%;
-  left:0;
+  left: 0;
   right: 0;
   margin: auto;
-  margin-top: 1rem;
+}
+
+* {
+  font-family: 'PT Sans Narrow', sans-serif;
 }

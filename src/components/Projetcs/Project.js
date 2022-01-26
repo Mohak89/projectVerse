@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import img from '../../logo.svg'
 import useDocumentTitle from "../useDocumentTitle";
 import { ReactComponent as Share } from '../../assets/share.svg'
+import { Link } from 'react-router-dom';
 //Project Card Component
 const ProjectCard = (props) => {
     return (
         <div className={styles.card}>
-                    <div className={styles.share}> <Share fill="black" width="100%" height="100%"  /></div>
-            <a href={props.link} target={'_blank'} rel={'noopener noreferrer'}>
+            <div className={styles.share}> <Share fill="black" width="100%" height="100%" /></div>
+            <Link to={`/article/${props.link}`} target={'_blank'} >
                 <div className={styles.cardWrapper}>
                     <img src={props.image} alt="" className={styles.image} />
                     <div className={styles.cardBody}>
@@ -19,7 +20,7 @@ const ProjectCard = (props) => {
                         <div className={styles.cardText}>{props.cardText}</div>
                     </div>
                 </div>
-            </a >
+            </Link>
         </div>
     )
 }
@@ -93,7 +94,7 @@ const Projects = () => {
     return (
         <div className={styles.projects} >
             {projectData.map((element) => (
-                <ProjectCard key={element._id} link={element.link} image={element.thumbnail} author={element.author} created={element.createdAt} title={element.title} cardText={element.discription} />
+                <ProjectCard key={element._id} link={element._id} image={element.thumbnail} author={element.author} created={element.createdAt} title={element.title} cardText={element.discription} />
             ))}
         </div>
     )

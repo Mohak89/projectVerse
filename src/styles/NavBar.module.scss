@@ -1,8 +1,7 @@
 .navBar {
     display: flex;
     flex-direction: row;
-    width: inherit;
-    position: absolute;
+    width: 100%;
     left: 0;
     min-height: 5rem;
     right: 0;
@@ -87,10 +86,4 @@
         flex-direction: column;
         background-color: inherit;
     }
-}
-.container {
-    height: 100%;
-    width: 100%;
-    top:6rem;
-    position: relative;
 }
