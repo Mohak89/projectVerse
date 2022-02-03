@@ -10,7 +10,7 @@ const ProjectCard = (props) => {
     return (
         <div className={styles.card}>
             <div className={styles.share}> <Share fill="black" width="100%" height="100%" /></div>
-            <Link to={`/article/${props.link}`} target={'_blank'} >
+            <Link to={`/project/${props.link}`} target={'_blank'} >
                 <div className={styles.cardWrapper}>
                     <img src={props.image} alt="" className={styles.image} />
                     <div className={styles.cardBody}>

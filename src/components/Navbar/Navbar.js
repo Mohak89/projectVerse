@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react"
 import {
-    BrowserRouter as Router,
-    Route,
     Link,
-    Routes
 } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-// import PlayGround from "../Dashboard/PlayGround/PlayGround";
-// import Features from "../Features/Feature";
 import styles from '../../styles/NavBar.module.scss'
 import Projects from "../Projetcs/Project";
 import CreateProject from "../Projetcs/createProject";
-// import LoginSignup from "../LoginSignup/AuthPage";
-// import Signup from '../LoginSignup/Signup'
-// import Login from "../LoginSignup/Login";
 const NavItem = (props) => {
     return (
         <Link to={props.to} className={props.active} onClick={props.click}>
@@ -72,7 +64,7 @@ const NavBar = () => {
         }
     }
     return (
-        <Router>
+        <>
             <div className={isMobile ? `${styles.navBar} ${styles.mobileNavBar}` : styles.navBar}>
                 <div className={styles.sub}>
                     <div className={styles.logo}>projectVerse</div>
@@ -88,14 +80,8 @@ const NavBar = () => {
                             click={handleClick} />
                     ))}
                 </div>
-
             </div>
-            <Routes>
-                {links.map(link => {
-                    return <Route exact path={link.to} key={link.key} element={link.component} />
-                })}
-            </Routes>
-        </Router>
+        </>
     )
 }
 
