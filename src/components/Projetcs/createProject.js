@@ -1,31 +1,42 @@
 import styles from './createProject.module.scss'
-import { Editor, EditorState } from "draft-js";
+import { Editor, EditorState, RichUtils } from "draft-js";
 import "draft-js/dist/Draft.css";
-import { useState,useRef } from 'react';
-
+import { useState, useRef } from 'react';
 const CreateProject = () => {
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
+    const onChange = (state) => {
+        setEditorState(state)
+    }
     const editor = useRef(null);
     function focusEditor() {
         editor.current.focus();
     }
+    const handleKeyCommand = (command) => {
+        const newState = RichUtils.handleKeyCommand(editorState, command);
+        if (newState) {
+            onChange(newState);
+            return 'handled';
+        }
+        return 'not-handled';
+    }
+    const styleMap = {
+        'STRIKETHROUGH': {
+          textDecoration: 'line-through',
+        },
+      };
     return (
         <div className={styles.createContainer}>
-            <div className={styles.title} contentEditable={true} />
-            <div
-                style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
-                onClick={focusEditor}
-            >
-                <Editor
-                    ref={editor}
-                    editorState={editorState}
-                    onChange={setEditorState}
-                    placeholder="Write something!"
-                />
-            </div>
-            <div className={styles.editor} contentEditable={true} />
+            <input className={styles.title} placeholder={"Title"} />
+            <Editor
+                
+                editorState={editorState}
+                onChange={setEditorState}
+                handleKeyCommand={handleKeyCommand}
+                customStyleMap={styleMap}
+                 />
+                 <div contentEditable={true} className={styles.editor}></div>
             <div className={styles.options}>
                 <label htmlFor="category">Category</label>
                 <select name="" id="category">

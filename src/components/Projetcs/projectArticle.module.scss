@@ -61,7 +61,8 @@
                     height: 30px;
                     width: 30px;
                     margin: 4px;
-                    text-align: center;
+                    display: grid;
+                    place-items: center;
                     border-radius: 50%;
                     background-color: red;
                 }

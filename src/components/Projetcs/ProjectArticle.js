@@ -2,6 +2,7 @@ import styles from './projectArticle.module.scss'
 import logo from '../../assets/share.svg'
 
 const projectArticle = (props) => {
+    console.log("Some shit happened")
     return (
         <>
             <div className={styles.container}>
