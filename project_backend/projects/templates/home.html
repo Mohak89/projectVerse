@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+<!-- adding the base.html and also nav.html to the home/..etc pages -->
+{% block content %}
+
+<h1>Hello WORLD!</h1>
+<p>added template- Home.html</p>
+{% comment %} {% if request.user.is_authenticated %} Logged in user Name:
+<h3 style="color: white">{{request.user}}</h3>
+{% endif %} {% endcomment %}
+<!-- {% block content2 %}
+
+            <h1>Hello WORLD!</h1>
+            
+    {% endblock %} -->
+{% endblock %}
