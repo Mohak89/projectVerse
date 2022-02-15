@@ -1,12 +1,13 @@
 .projects {
-    display: grid;
-    grid-template-columns: auto auto;
-    place-items: center;
-    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: 100%;
     position: relative;
     left: 0;
     right: 0;
     margin: auto;
+    margin-top: 2rem;
 
     a,
     :visited {
@@ -17,7 +18,7 @@
     .card {
         position: relative;
         min-width: 10rem;
-        width: 15rem;
+        width: 100%;
         transition: 0.4s all ease-in-out;
 
         &:hover {
@@ -33,6 +34,7 @@
             border-radius: 50%;
             top: 10px;
             right: 50px;
+            z-index: 1;
             transition: 0.4s all ease-in-out;
 
             &:hover {
@@ -55,10 +57,14 @@
             border-radius: 20px;
             overflow: hidden;
 
-            .image {
-                background-color: black;
-                height: inherit;
-                width: auto;
+            .imageContainer {
+                position: relative;
+                width: 100%;
+                .image {
+                    background-color: black;
+                    height: auto;
+                    width: 100%;
+                }
             }
 
             .cardBody {
@@ -79,25 +85,50 @@
                 }
 
             }
+
+            .projectMoreInfo {
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px solid #d8d8d8;
+                place-items: center;
+                width: 100%;
+                padding: 4px;
+                box-sizing: border-box;
+
+                .projectStats {
+                    display: flex;
+                    place-self: self-start;
+                    padding: 4px;
+
+                    .likes,
+                    .views {
+                        padding: 4px;
+                        display: flex;
+                    }
+                }
+
+                .bookmark {
+                    padding: 4px
+                }
+            }
         }
     }
 
-    @media screen and (max-width:641px) {
-        display: flex;
-        flex-direction: column;
-
+    @media (min-width:480px) {
         .card {
-            height: 2rem;
+            width: 50%;
+        }
+    }
 
-            .card-body {
-                .title {
-                    font-size: 14px;
-                }
+    @media (min-width:768px) {
+        .card {
+            width: 33.33%;
+        }
+    }
 
-                .cardText {
-                    font-size: 12px;
-                }
-            }
+    @media (min-width:1024px) {
+        .card {
+            width: 25%;
         }
     }
 }

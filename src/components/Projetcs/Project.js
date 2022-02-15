@@ -5,22 +5,41 @@ import img from '../../logo.svg'
 import useDocumentTitle from "../useDocumentTitle";
 import { ReactComponent as Share } from '../../assets/share.svg'
 import { Link } from 'react-router-dom';
+import { ReactComponent as Bookmark } from '../../assets/bookmark_border_black_24dp.svg'
+import { ReactComponent as Like } from '../../assets/thumb_up_alt_black_24dp.svg'
+import { ReactComponent as View } from '../../assets/visibility_black_24dp.svg'
 //Project Card Component
 const ProjectCard = (props) => {
     return (
         <div className={styles.card}>
             <div className={styles.share}> <Share fill="black" width="100%" height="100%" /></div>
-            <Link to={`/project/${props.link}`} target={'_blank'} >
-                <div className={styles.cardWrapper}>
+            <div className={styles.cardWrapper}>
+                <Link className={styles.imageContainer} to={`/project/${props.link}`} target={'_blank'} >
                     <img src={props.image} alt="" className={styles.image} />
-                    <div className={styles.cardBody}>
-                        <div className={styles.cardText}>{props.author}</div>
-                        <div className={styles.cardText}>{props.createdAt}</div>
-                        <div className={styles.title}>{props.title}</div>
-                        <div className={styles.cardText}>{props.cardText}</div>
+                </Link>
+                <div className={styles.cardBody}>
+                    <div className={styles.cardText}>{props.author}</div>
+                    <div className={styles.cardText}>{props.createdAt}</div>
+                    <div className={styles.title}>{props.title}</div>
+                    <div className={styles.cardText}>{props.cardText}</div>
+                </div>
+                <div className={styles.projectMoreInfo}>
+                    <div className={styles.projectStats}>
+                        <div className={styles.likes}>
+                            <Like />
+                            {props.likes}
+                        </div>
+                        <div className={styles.views}>
+                            <View />
+                            {props.views}
+                        </div>
+                    </div>
+                    <div className={styles.bookmark}>
+                        <Bookmark />
                     </div>
                 </div>
-            </Link>
+
+            </div>
         </div>
     )
 }
@@ -57,6 +76,8 @@ const Projects = () => {
             status: 'Fucked up',
             link: 'https://www.linkedin.com/in/manik-singhal/',
             thumbnail: img,
+            likes: 111,
+            views: 1111,
             createdAt: '1 eternity ago'
         },
         {
@@ -89,12 +110,52 @@ const Projects = () => {
             link: 'dasdasda',
             thumbnail: img,
             createdAt: 'dasdasd'
+        },
+        {
+            _id: '4',
+            title: 'Some shit',
+            author: 'sadasdas',
+            discription: 'asdasda',
+            status: 'asdasdasd',
+            link: 'dasdasda',
+            thumbnail: img,
+            createdAt: 'dasdasd'
+        },
+        {
+            _id: '4',
+            title: 'Some shit',
+            author: 'sadasdas',
+            discription: 'asdasda',
+            status: 'asdasdasd',
+            link: 'dasdasda',
+            thumbnail: img,
+            createdAt: 'dasdasd'
+        },
+        {
+            _id: '4',
+            title: 'Some shit',
+            author: 'sadasdas',
+            discription: 'asdasda',
+            status: 'asdasdasd',
+            link: 'dasdasda',
+            thumbnail: img,
+            createdAt: 'dasdasd'
+        },
+        {
+            _id: '4',
+            title: 'Some shit',
+            author: 'sadasdas',
+            discription: 'asdasda',
+            status: 'asdasdasd',
+            link: 'dasdasda',
+            thumbnail: img,
+            createdAt: 'dasdasd'
         }
     ]
     return (
         <div className={styles.projects} >
             {projectData.map((element) => (
-                <ProjectCard key={element._id} link={element._id} image={element.thumbnail} author={element.author} created={element.createdAt} title={element.title} cardText={element.discription} />
+                <ProjectCard key={element._id} link={element._id} image={element.thumbnail} likes={element.likes} views={element.views} author={element.author} created={element.createdAt} title={element.title} cardText={element.discription} />
             ))}
         </div>
     )
