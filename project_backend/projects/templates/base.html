@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+      }
+      .navbar li
+      {
+        margin-left: 0px;
+        padding-left: 5%;
+      }
+      {% comment %} .navbar li:hover{
+        font-size: 20px;
+        transition: .3s;
+      } {% endcomment %}
+      #sdbar {
+        margin-right: 10px;
+        {% comment %} no need of {% load static %}  beacuse using URLs{% endcomment %}
+        background: url("/static/img/projectyverse_sdbarimg.png") 0% 100% no-repeat;
+        width: 20%;
+        height:91%;
+        border: 0.5px solid darkgrey;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 1; /* Stay at the top */
+        right: 0;
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+      }
+      #ctrcontent {
+
+      }
+      #accounts {
+
+      }
+    </style>
+  </head>
+  <body class="container-fluid" style="background-color: bisque">
+    {% include 'nav.html' %}
+    <div style="height: 5px"></div>
+    <!-- 
+            to make the template and to make it more accessible to all 
+        other pages, we are using this. 
+        By using this, we can have the whole body as it is, but the content
+        inside the block will replaced by that page content 
+    -->
+    <div class="row">
+      <div class="col-sm-3" id="accounts">
+        <div class="btn btn-dark btn-sm p-0">
+          <a class="nav-link" href="/login">login</a>
+        </div>
+        <div class="btn btn-light btn-sm p-0">
+          <a class="nav-link" href="/register">Register</a>
+        </div>
+        <div class="btn btn-success btn-sm p-0">
+          <a class="nav-link" href="/logout">logout</a>
+        </div>
+      </div>
+      <div
+        class="col-8"
+        id="ctrcontent"
+        style="
+          background: #ccccff;
+          margin-left: 15%;
+          margin-right: 15%;
+          border-radius: 10px;
+          padding-bottom: 10px;
+        "
+      >
+        {% block content %}
+        <!-- replace me -->
+        {% endblock %}
+      </div>
+
+      {% comment %}
+      <div class="col-sm-3 text-light" id="sdbar">
+        This Content will be based on Tabs that will open. Like this is
+        "{{request.get_full_path}}" page
+      </div>
+      {% endcomment %}
+      <!-- inside here, 
+                'block' is of Django
+            &   'content' is the variable name that we have to replace 
+        -->
+    </div>
+  </body>
+</html>
