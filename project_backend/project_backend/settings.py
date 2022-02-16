@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+
     # Third party apps
     'rest_framework',
 
     # OWN Apps
     'authentication',
-    
+    'projects',
+
 ]
 
 AUTH_USER_MODEL = "authentication.User"
@@ -55,7 +58,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:3000',
+)
 # Rest Framework
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -70,7 +77,7 @@ ROOT_URLCONF = 'project_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,10 +100,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': 'jety',
-        'USER': 'stw',
-        'PASSWORD': '123@321',
-        'HOST': 'localhost',
+        'NAME': 'd3hho7hi504ct',
+        'USER': 'hlwiebtdzrlepx',
+        'PASSWORD': '389928872bfde8faf8e97738b8abfe2ae29ffc832428093f4ce3edae03e46a32',
+        'HOST': 'ec2-3-212-143-188.compute-1.amazonaws.com',
         'PORT': '',
     }
 }
