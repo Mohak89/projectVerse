@@ -2,6 +2,7 @@ import styles from '../../styles/projects.module.scss'
 
 import { useEffect, useState } from "react";
 import img from '../../logo.svg'
+import axios from 'axios'
 import useDocumentTitle from "../useDocumentTitle";
 import { ReactComponent as Share } from '../../assets/share.svg'
 import { Link } from 'react-router-dom';
@@ -152,10 +153,27 @@ const Projects = () => {
             createdAt: 'dasdasd'
         }
     ]
+    const getProjects = async () =>{
+        const data = await axios({
+            method:'GET',
+            url:'http://127.0.0.1:8000/api/projects/?format=json'
+        })
+        console.log(data)
+    }
+        getProjects()
     return (
         <div className={styles.projects} >
             {projectData.map((element) => (
-                <ProjectCard key={element._id} link={element._id} image={element.thumbnail} likes={element.likes} views={element.views} author={element.author} created={element.createdAt} title={element.title} cardText={element.discription} />
+                <ProjectCard 
+                    key={element._id} 
+                    link={element._id} 
+                    image={element.thumbnail} 
+                    likes={element.likes} 
+                    views={element.views} 
+                    author={element.author} 
+                    created={element.createdAt} 
+                    title={element.title} 
+                    cardText={element.discription} />
             ))}
         </div>
     )

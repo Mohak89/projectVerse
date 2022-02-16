@@ -21,10 +21,6 @@
         width: 100%;
         transition: 0.4s all ease-in-out;
 
-        &:hover {
-            transform: rotate(-2deg);
-        }
-
         .share {
             position: absolute;
             width: 26px;
@@ -35,7 +31,6 @@
             top: 10px;
             right: 50px;
             z-index: 1;
-            transition: 0.4s all ease-in-out;
 
             &:hover {
                 path {
@@ -56,6 +51,10 @@
             box-shadow: 4px 4px 20px black, -4px -4px 20px grey;
             border-radius: 20px;
             overflow: hidden;
+            transition: 0.4s all ease-in-out;
+            &:hover {
+                transform: rotate(-2deg);
+            }
 
             .imageContainer {
                 position: relative;
