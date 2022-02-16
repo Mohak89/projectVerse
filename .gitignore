@@ -23,6 +23,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 <<<<<<< HEAD
+<<<<<<< HEAD
 env/
 node_modules/*
 backend-env/*
+=======
+env/*
+__pycache__/
+backend-env/
+>>>>>>> origin/back-end
