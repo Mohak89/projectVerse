@@ -1,0 +1,39 @@
+.createContainer {
+    position: relative;
+    width: 100%;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+
+    .title {
+        width: 100%;
+        font-size: 32px;
+        font-weight: bold;
+        padding: 0.4rem;
+        padding-left: 1rem;
+        box-sizing: border-box;
+        border-radius: 4px;
+        border: none
+    }
+        .editor {
+            margin-top: 1rem;
+            height: 60vh;
+            padding: 0.4rem;
+            border-radius: 4px;
+            box-sizing: border-box;
+            border: none
+        }
+
+        .options {
+            margin-top: 1rem;
+
+            label {
+                margin-right: 4px;
+            }
+
+            select {
+                border-radius: 4px;
+            }
+        }
+    }

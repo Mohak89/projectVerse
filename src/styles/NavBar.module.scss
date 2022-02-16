@@ -1,0 +1,89 @@
+.navBar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    left: 0;
+    min-height: 5rem;
+    right: 0;
+    margin: auto;
+    font-size: 1.2rem;
+    justify-content: space-between;
+    background: linear-gradient(290deg, #e6b2ff, #58fff2);
+    border-radius: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 4px 4px 20px #676767, 2px 2px 10px grey;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:visited {
+        color: black;
+    }
+
+    .logo {
+        padding: 0.4rem;
+        margin: 0.5rem;
+        height: max-content;
+        top: 0;
+        font-size: 1.7rem;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .mainMenu {
+        display: flex;
+        height: max-content;
+        margin-top: auto;
+        margin-bottom: auto;
+
+        .menuItem {
+            place-items: center;
+            padding: 0.4rem;
+            margin: 0.5rem;
+        }
+    }
+
+    .sub {
+        display: flex;
+        border-radius: 20px;
+        justify-content: space-between;
+    }
+}
+.mobileNavBar {
+    flex-direction: column;
+    overflow: hidden;
+
+    .hamburger {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        height: 2rem;
+        width: 2rem;
+        margin: 1rem;
+        padding: 0.4rem;
+
+        .bar {
+            height: 3px;
+            width: 100%;
+            background-color: black;
+        }
+    }
+
+    .mobileMainMenu {
+        display: none;
+        place-items: center;
+        .menuItem {
+            width: max-content;
+            padding: 0.4rem;
+        }
+    }
+
+    .activeMenu {
+        display: flex;
+        flex-direction: column;
+        background-color: inherit;
+    }
+}
