@@ -1,0 +1,108 @@
+.containerWrapper {
+    padding-top: 1rem;
+
+    .bannerWrapper {
+        height: 230px;
+
+        .bannerContainer {
+            display: flex;
+            min-height: 120px;
+            height: inherit;
+            overflow: hidden;
+            position: relative;
+            background-color: rgb(229, 232, 235);
+
+            .banner {
+                background-color: grey;
+            }
+            .bannerImage{
+                height: 600px;
+                width: 100%;
+                -webkit-box-align: center;
+                align-items: center;
+                display: flex;
+                -webkit-box-pack: center;
+                justify-content: center;
+                max-height: 100%;
+                max-width: 100%;
+                overflow: hidden;
+                position: relative;
+                img{
+                    object-fit: cover;
+                    height: 100%;
+                    transition: opacity 400ms ease 0s;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .shareContainer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        -webkit-box-align: center;
+        align-items: center;
+        padding: 0px 8px;
+        width: 100%;
+        position: sticky;
+        box-sizing: border-box;
+        top: 72px;
+        z-index: 50;
+        left: 0px;
+        height: 72px;
+        margin-bottom: calc(-72px);
+        transition: opacity 0.2s ease-in 0s;
+        .share{
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .userInfo {
+        max-width: 500px;
+        position: relative;
+        -webkit-box-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        margin: 0px auto;
+        .userImage{
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            img{
+                height: inherit;
+                width: inherit;
+                border-radius: inherit;
+            }
+
+        }
+
+        .userName {
+            font-size: 60px;
+        }
+
+        .socialMedia {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            column-gap: 24px;
+
+            .media {
+                display: flex;
+                -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-pack: end;
+                font-size: 30px;
+                justify-content: flex-end;
+            }
+
+            .verticalSeprator {
+                height: 100%;
+                width: 1px;
+                background-color: rgb(229, 232, 235);
+
+            }
+        }
+    }
+}

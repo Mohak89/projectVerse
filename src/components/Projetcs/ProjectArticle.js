@@ -1,7 +1,8 @@
 import styles from './projectArticle.module.scss'
 import logo from '../../assets/share.svg'
-
+import useDocumentTitle from '../useDocumentTitle';
 const projectArticle = (props) => {
+    useDocumentTitle('Some shit');
     console.log("Some shit happened")
     return (
         <>

@@ -2,10 +2,8 @@ import { useEffect, useState } from "react"
 import {
     Link,
 } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
+import { useAuth0 } from "@auth0/auth0-react";
 import styles from '../../styles/NavBar.module.scss'
-import Projects from "../Projetcs/Project";
-import CreateProject from "../Projetcs/createProject";
 const NavItem = (props) => {
     return (
         <Link to={props.to} className={props.active} onClick={props.click}>
@@ -24,13 +22,15 @@ const HamBurger = (props) => {
         </div>
     )
 }
-const NavBar = () => {
+const NavBar = (props) => {
     const [isMobile, setMobileNavBar] = useState(false);
     const [isBurger, setBurger] = useState(false);
     const [width, setWidth] = useState(window.innerWidth);
     const handleClick = () => {
         setBurger(!isBurger)
     }
+    const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+
     useEffect(() => {
         if (width <= 780) {
             setMobileNavBar(true);
@@ -48,12 +48,7 @@ const NavBar = () => {
             }
         })
     }, [width])
-    const links = [
-        { to: '/', title: 'Home', component: '', key: uuidv4() },
-        { to: '/explore', title: 'Explore', component: <Projects />, key: uuidv4() },
-        { to: '/profile', title: 'Profile', component: '', key: uuidv4() },
-        { to: '/create', title: 'Create', component: <CreateProject />, key: uuidv4() }
-    ]
+    const links = props.links
     function getClass() {
         if (!isMobile) {
             return styles.mainMenu
@@ -79,6 +74,12 @@ const NavBar = () => {
                             classes={styles.menuItem}
                             click={handleClick} />
                     ))}
+                    {!isAuthenticated && <div onClick={() => loginWithRedirect()} className={styles.menuItem}>Login</div>}
+                    {isAuthenticated && <>
+                        <div className={styles.profile}>
+                            <img src={user.picture} alt={user.name} className={styles.picture}/>
+                        </div>
+                    </>}
                 </div>
             </div>
         </>
