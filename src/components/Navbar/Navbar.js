@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from '../../styles/NavBar.module.scss'
-import {ReactComponent as Close} from '../../assets/close_black_24dp.svg'
+import { ReactComponent as Close } from '../../assets/close_black_24dp.svg'
 
 const NavItem = (props) => {
     return (
@@ -26,27 +26,27 @@ const HamBurger = (props) => {
 }
 const NavBar = (props) => {
     const [isMobile, setMobileNavBar] = useState(false);
-    const [isBurger, setBurger] = useState(false);
+    const [isMenuVisible, setMenuVisible] = useState(false);
     const [width, setWidth] = useState(window.innerWidth);
     const handleClick = () => {
-        setBurger(!isBurger)
+        setMenuVisible(!isMenuVisible)
     }
     const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
     useEffect(() => {
         if (width <= 780) {
             setMobileNavBar(true);
-            setBurger(true)
+            setMenuVisible(true)
         }
         window.addEventListener('resize', () => {
             setWidth(window.innerWidth)
             if (width <= 780) {
                 setMobileNavBar(true);
-                setBurger(true)
+                setMenuVisible(true)
             }
             else {
                 setMobileNavBar(false);
-                setBurger(false)
+                setMenuVisible(false)
             }
         })
     }, [width])
@@ -56,23 +56,17 @@ const NavBar = (props) => {
             return styles.mainMenu
         }
         else {
-            if (isBurger) return styles.mobileMainMenu;
+            if (isMenuVisible) return styles.mobileMainMenu;
             else return `${styles.mobileMainMenu} ${styles.activeMenu}`
         }
     }
     return (
         <>
-            <div className={isMobile ? `${styles.navBar} ${styles.mobileNavBar}` : styles.navBar}>
+            {!isMobile && <div className={styles.navBar}>
                 <div className={styles.sub}>
                     <div className={styles.logo}>projectVerse</div>
-                    {isMobile ? <HamBurger isBurger={isBurger} click={handleClick} /> : ''}
                 </div>
-                {isMobile && !isBurger && <div className={styles.overlay}></div>}
                 <div className={getClass()}>
-                    {isMobile && <>
-                        <div className={styles.logo}>projectVerse</div>
-                        <div onClick={handleClick} className={styles.close}><Close/></div>
-                    </>}
                     {links.map(link => (
                         <NavItem
                             to={link.to}
@@ -89,6 +83,34 @@ const NavBar = (props) => {
                     </>}
                 </div>
             </div>
+            }
+            {isMobile &&
+                <div className={`${styles.navBar} ${styles.mobileNavBar}`}>
+                    <div className={styles.sub}>
+                        <div className={styles.logo}>projectVerse</div>
+                        <HamBurger isMenuVisible={isMenuVisible} click={handleClick} />
+                    </div>
+                    {!isMenuVisible && <div className={styles.overlay}></div>}
+                    <div className={getClass()}>
+                        <div className={styles.logo}>projectVerse</div>
+                        <div onClick={handleClick} className={styles.close}><Close /></div>
+                        {links.map(link => (
+                            <NavItem
+                                to={link.to}
+                                key={link.key}
+                                ItemText={link.title}
+                                classes={styles.menuItem}
+                                click={handleClick} />
+                        ))}
+                        {!isAuthenticated && <div onClick={() => loginWithRedirect()} className={styles.menuItem}>Login</div>}
+                        {isAuthenticated && <>
+                            <div className={styles.profile}>
+                                <img src={user.picture} alt={user.name} className={styles.picture} />
+                            </div>
+                        </>}
+                    </div>
+                </div>
+            }
         </>
     )
 }
