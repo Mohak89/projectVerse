@@ -15,7 +15,6 @@ const AboutInnovator = () => {
                 </div>
             </div>
             <div className={styles.shareContainer}>
-                <div></div>
                 <div className={styles.share}>
                     <Share />
                 </div>

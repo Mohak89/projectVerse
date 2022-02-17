@@ -37,11 +37,11 @@
         }
     }
     .shareContainer{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
         -webkit-box-align: center;
         align-items: center;
         padding: 0px 8px;
+        justify-content: end;
         width: 100%;
         position: sticky;
         box-sizing: border-box;

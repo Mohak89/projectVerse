@@ -52,6 +52,7 @@
             border-radius: 20px;
             overflow: hidden;
             transition: 0.4s all ease-in-out;
+
             &:hover {
                 transform: rotate(-2deg);
             }
@@ -59,6 +60,7 @@
             .imageContainer {
                 position: relative;
                 width: 100%;
+
                 .image {
                     background-color: black;
                     height: auto;
@@ -107,7 +109,21 @@
                 }
 
                 .bookmark {
-                    padding: 4px
+                    padding: 4px;
+
+                    path {
+                        stroke: rgb(192, 192, 192);
+                        stroke-width: 100;
+                        stroke-linecap: round;
+                        stroke-dasharray: 0;
+                        fill: none;
+                    }
+
+                    .marked {
+                        path {
+                            fill: silver;
+                        }
+                    }
                 }
             }
         }
