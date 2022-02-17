@@ -43,18 +43,19 @@
 
         .cardWrapper {
             display: flex;
-            height: auto;
+            max-height: 28rem;
             flex-direction: column;
             margin: 1rem;
             place-items: center;
+            justify-content: space-between;
             box-sizing: border-box;
-            box-shadow: 4px 4px 20px black, -4px -4px 20px grey;
+            box-shadow: 4px 4px 20px #c9c9c9, -4px -4px 20px #aeaeae;
             border-radius: 20px;
             overflow: hidden;
             transition: 0.4s all ease-in-out;
 
             &:hover {
-                transform: rotate(-2deg);
+                transform: rotate(-1deg);
             }
 
             .imageContainer {

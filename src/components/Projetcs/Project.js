@@ -13,7 +13,7 @@ import { ReactComponent as View } from '../../assets/visibility_black_24dp.svg'
 const ProjectCard = (props) => {
     return (
         <div className={styles.card}>
-            <div className={styles.share}> <Share fill="black" width="100%" height="100%" /></div>
+            {/* <div className={styles.share}> <Share fill="black" width="100%" height="100%" /></div> */}
             <div className={styles.cardWrapper}>
                 <Link className={styles.imageContainer} to={`/project/${props.link}`} target={'_blank'} >
                     <img src={props.image} alt="" className={styles.image} />
@@ -22,7 +22,7 @@ const ProjectCard = (props) => {
                     <div className={styles.cardText}>{props.author}</div>
                     <div className={styles.cardText}>{props.createdAt}</div>
                     <div className={styles.title}>{props.title}</div>
-                    <div className={styles.cardText}>{props.cardText}</div>
+                    <div className={styles.cardText}>{props.discription}</div>
                 </div>
                 <div className={styles.projectMoreInfo}>
                     <div className={styles.projectStats}>
@@ -48,132 +48,127 @@ const ProjectCard = (props) => {
 
 const Projects = () => {
     useDocumentTitle('Projects')
-    // const [projectData, setData] = useState([])
-    // const projectAPI = () => {
-    //     try {
-    //         axios({
-    //             method: "GET",
-    //             url: "http://localhost:5000/api/projects",
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json;charset=UTF-8',
-    //             }
-    //         }).then((res) => { setData(res.data) })
-    //     } catch (error) {
-    //         console.error(error);
-    //         return error
-    //     }
-    // }
-    // useEffect(() => {
-    //     projectAPI();
-    // }, [])
-
-    const projectData = [
-        {
-            _id: '1',
-            title: 'Some shit',
-            author: 'Steve',
-            discription: 'Steve made apple inc we make pineapple',
-            status: 'Fucked up',
-            link: 'https://www.linkedin.com/in/manik-singhal/',
-            thumbnail: img,
-            likes: 111,
-            views: 1111,
-            createdAt: '1 eternity ago'
-        },
-        {
-            _id: '2',
-            title: 'Some shit',
-            author: 'a',
-            discription: 'lorem',
-            status: 'lorem',
-            link: 'adsdas',
-            thumbnail: img,
-            createdAt: 'asdasdasd'
-
-        },
-        {
-            _id: '3',
-            title: 'Some shit',
-            author: 'sadasdas',
-            discription: 'asdasda',
-            status: 'asdasdasd',
-            link: 'dasdasda',
-            thumbnail: img,
-            createdAt: 'dasdasd'
-        },
-        {
-            _id: '4',
-            title: 'Some shit',
-            author: 'sadasdas',
-            discription: 'asdasda',
-            status: 'asdasdasd',
-            link: 'dasdasda',
-            thumbnail: img,
-            createdAt: 'dasdasd'
-        },
-        {
-            _id: '4',
-            title: 'Some shit',
-            author: 'sadasdas',
-            discription: 'asdasda',
-            status: 'asdasdasd',
-            link: 'dasdasda',
-            thumbnail: img,
-            createdAt: 'dasdasd'
-        },
-        {
-            _id: '4',
-            title: 'Some shit',
-            author: 'sadasdas',
-            discription: 'asdasda',
-            status: 'asdasdasd',
-            link: 'dasdasda',
-            thumbnail: img,
-            createdAt: 'dasdasd'
-        },
-        {
-            _id: '4',
-            title: 'Some shit',
-            author: 'sadasdas',
-            discription: 'asdasda',
-            status: 'asdasdasd',
-            link: 'dasdasda',
-            thumbnail: img,
-            createdAt: 'dasdasd'
-        },
-        {
-            _id: '4',
-            title: 'Some shit',
-            author: 'sadasdas',
-            discription: 'asdasda',
-            status: 'asdasdasd',
-            link: 'dasdasda',
-            thumbnail: img,
-            createdAt: 'dasdasd'
+    const [projectData, setData] = useState([])
+    const projectAPI = async() => {
+        try {
+            const data = await axios({
+                method: "GET",
+                url: "http://127.0.0.1:8000/api/projects/?format=json",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8',
+                }
+            })
+            setData(data.data.results)
+        } catch (error) {
+            console.error(error);
+            return error
         }
-    ]
-    const getProjects = async () =>{
-        const data = await axios({
-            method:'GET',
-            url:'http://127.0.0.1:8000/api/projects/?format=json'
-        })
-        console.log(data)
     }
-        getProjects()
+    useEffect(() => {
+        projectAPI();
+        console.log(projectData)
+    }, [projectData])
+
+    // const projectData = [
+    //     {
+    //         _id: '1',
+    //         title: 'Some shit',
+    //         author: 'Steve',
+    //         discription: 'Steve made apple inc we make pineapple',
+    //         status: 'Fucked up',
+    //         link: 'https://www.linkedin.com/in/manik-singhal/',
+    //         thumbnail: img,
+    //         likes: 111,
+    //         views: 1111,
+    //         createdAt: '1 eternity ago'
+    //     },
+    //     {
+    //         _id: '2',
+    //         title: 'Some shit',
+    //         author: 'a',
+    //         discription: 'lorem',
+    //         status: 'lorem',
+    //         link: 'adsdas',
+    //         thumbnail: img,
+    //         createdAt: 'asdasdasd'
+
+    //     },
+    //     {
+    //         _id: '3',
+    //         title: 'Some shit',
+    //         author: 'sadasdas',
+    //         discription: 'asdasda',
+    //         status: 'asdasdasd',
+    //         link: 'dasdasda',
+    //         thumbnail: img,
+    //         createdAt: 'dasdasd'
+    //     },
+    //     {
+    //         _id: '4',
+    //         title: 'Some shit',
+    //         author: 'sadasdas',
+    //         discription: 'asdasda',
+    //         status: 'asdasdasd',
+    //         link: 'dasdasda',
+    //         thumbnail: img,
+    //         createdAt: 'dasdasd'
+    //     },
+    //     {
+    //         _id: '4',
+    //         title: 'Some shit',
+    //         author: 'sadasdas',
+    //         discription: 'asdasda',
+    //         status: 'asdasdasd',
+    //         link: 'dasdasda',
+    //         thumbnail: img,
+    //         createdAt: 'dasdasd'
+    //     },
+    //     {
+    //         _id: '4',
+    //         title: 'Some shit',
+    //         author: 'sadasdas',
+    //         discription: 'asdasda',
+    //         status: 'asdasdasd',
+    //         link: 'dasdasda',
+    //         thumbnail: img,
+    //         createdAt: 'dasdasd'
+    //     },
+    //     {
+    //         _id: '4',
+    //         title: 'Some shit',
+    //         author: 'sadasdas',
+    //         discription: 'asdasda',
+    //         status: 'asdasdasd',
+    //         link: 'dasdasda',
+    //         thumbnail: img,
+    //         createdAt: 'dasdasd'
+    //     },
+    //     {
+    //         _id: '4',
+    //         title: 'Some shit',
+    //         author: 'sadasdas',
+    //         discription: 'asdasda',
+    //         status: 'asdasdasd',
+    //         link: 'dasdasda',
+    //         thumbnail: img,
+    //         createdAt: 'dasdasd'
+    //     }
+    // ]
     return (
         <div className={styles.projects} >
             {projectData.map((element) => (
                 <ProjectCard 
-                    key={element._id} 
-                    link={element._id} 
-                    image={element.thumbnail} 
-                    likes={element.likes} 
-                    views={element.views} 
-                    author={element.author} 
-                    created={element.createdAt} 
-                    title={element.title} 
-                    cardText={element.discription} />
+                    key={element.id} 
+                    link={element.id} 
+                    image={"https://hackster.imgix.net/uploads/attachments/1315695/_uFAv7dW5nX.blob?auto=compress%2Cformat&w=350&h=262.5&fit=min&dpr=1.3020833730697632"} 
+                    likes={0} 
+                    views={0} 
+                    author={element.owner} 
+                    created={new Date(element.created).toDateString()} 
+                    title={element.project_title} 
+                    status={element.project_status}
+                    discription={element.discription} />
             ))}
         </div>
     )

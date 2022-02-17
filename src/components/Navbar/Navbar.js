@@ -4,6 +4,8 @@ import {
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from '../../styles/NavBar.module.scss'
+import {ReactComponent as Close} from '../../assets/close_black_24dp.svg'
+
 const NavItem = (props) => {
     return (
         <Link to={props.to} className={props.active} onClick={props.click}>
@@ -65,7 +67,12 @@ const NavBar = (props) => {
                     <div className={styles.logo}>projectVerse</div>
                     {isMobile ? <HamBurger isBurger={isBurger} click={handleClick} /> : ''}
                 </div>
+                {isMobile && !isBurger && <div className={styles.overlay}></div>}
                 <div className={getClass()}>
+                    {isMobile && <>
+                        <div className={styles.logo}>projectVerse</div>
+                        <div onClick={handleClick} className={styles.close}><Close/></div>
+                    </>}
                     {links.map(link => (
                         <NavItem
                             to={link.to}
@@ -77,7 +84,7 @@ const NavBar = (props) => {
                     {!isAuthenticated && <div onClick={() => loginWithRedirect()} className={styles.menuItem}>Login</div>}
                     {isAuthenticated && <>
                         <div className={styles.profile}>
-                            <img src={user.picture} alt={user.name} className={styles.picture}/>
+                            <img src={user.picture} alt={user.name} className={styles.picture} />
                         </div>
                     </>}
                 </div>
