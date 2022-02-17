@@ -30,6 +30,7 @@ const NavBar = (props) => {
     const [width, setWidth] = useState(window.innerWidth);
     const handleClick = () => {
         setMenuVisible(!isMenuVisible)
+        document.body.classList.add(styles.noscroll)
     }
     const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 

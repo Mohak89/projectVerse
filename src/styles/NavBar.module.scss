@@ -101,7 +101,7 @@
         .menuItem {
             width: 100%;
             box-sizing: border-box;
-            padding: 0.5rem 1rem;
+            padding: 1rem;
             border-bottom: 1px solid rgb(194, 194, 194);
         }
     }
@@ -127,4 +127,7 @@
     position: fixed;
     z-index: inherit;
     background-color: rgba(189, 187, 187, 0.295);
+}
+.noscroll{
+    overflow: hidden;
 }
