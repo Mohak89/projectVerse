@@ -30,6 +30,7 @@ from django.contrib.auth import get_user_model
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    # path('', include('projects.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')), # new
     path('api/', include('projects.urls')),

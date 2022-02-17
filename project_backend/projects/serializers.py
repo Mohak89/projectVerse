@@ -8,13 +8,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source = 'owner.username')
     class Meta:
         model = Project
-        fields = [
-            'id',
-            'owner',
-            'project_title',
-            'project_desc',
-            'project_link'
-        ]
+        fields = "__all__"
         lookup_field = 'id'
 
 class UserSerializer(serializers.ModelSerializer):
