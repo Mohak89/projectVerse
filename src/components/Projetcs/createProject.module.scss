@@ -1,39 +1,44 @@
 .createContainer {
     position: relative;
-    width: 100%;
+    width: 80%;
+    max-width: 1000px;
     margin-top: 1rem;
     margin-left: auto;
     margin-right: auto;
-    min-height: 100vh;
+    box-shadow: 4px 4px 20px rgb(202, 202, 202), -4px -4px 20px rgb(240, 240, 240);
+    border-radius: 20px;
+    padding: 1rem;
 
     .title {
         width: 100%;
-        font-size: 32px;
-        font-weight: bold;
-        padding: 0.4rem;
-        padding-left: 1rem;
+        max-width: 650px;
+        left: 0;
+        right: 0;
+        margin: auto;
         box-sizing: border-box;
-        border-radius: 4px;
-        border: none
-    }
-        .editor {
-            margin-top: 1rem;
-            height: 60vh;
-            padding: 0.4rem;
+
+        input {
             border-radius: 4px;
-            box-sizing: border-box;
-            border: none
-        }
-
-        .options {
-            margin-top: 1rem;
-
-            label {
-                margin-right: 4px;
-            }
-
-            select {
-                border-radius: 4px;
-            }
+            border: none;
+            width: 100%;
+            font-size: 32px;
+            font-weight: bold;
         }
     }
+
+    #editorjs {
+        width: 100%;
+    }
+
+    .options {
+        margin-top: 1rem;
+
+        label {
+            margin-right: 4px;
+        }
+
+        select {
+            border-radius: 4px;
+        }
+    }
+}
