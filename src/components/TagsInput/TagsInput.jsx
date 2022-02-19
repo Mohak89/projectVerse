@@ -1,8 +1,8 @@
-import { ReactComponent as Close } from '../../assets/close_black_24dp.svg'
+import { ReactComponent as CloseIcon } from '../../assets/close_black_24dp.svg'
 import { useState } from 'react';
-import styles from './TagsInput.module.scss'
+import { Close, TagsWrapper, Tag, StyledInput } from './TagsInputStyles'
 
-const TagsInput = ({tags,setTags}) => {
+const TagsInput = ({ tags, setTags }) => {
 
     const [input, setInput] = useState('')
     const deleteTag = (index) => {
@@ -11,7 +11,7 @@ const TagsInput = ({tags,setTags}) => {
     const onChange = (e) => {
         const { value } = e.target;
         setInput(value);
-      };
+    };
     const onKeyDown = (e) => {
         const key = e.key
         if (key === 'Backspace' && input.length === 0) {
@@ -20,26 +20,27 @@ const TagsInput = ({tags,setTags}) => {
             setInput(removedTag)
             setTags(tagsCopy)
         }
-        if(key==='Enter'){
-            setTags([...tags,input])
+        if (key === 'Enter') {
+            setTags([...tags, input])
             setInput('')
         }
     }
     return (
-        <div className={styles.tagsWrapper}>
+        <TagsWrapper>
             {tags.map((tag, index) =>
-                <div className={styles.tag} key={index}>
+                <Tag key={index}>
                     {tag}
-                    <div className={styles.close} onClick={() => deleteTag(index)}>
-                        <Close />
-                    </div>
-                </div>)}
-            <input type="text" 
-                value={input} 
-                onChange={(e)=>onChange(e)}
+                    <Close onClick={() => deleteTag(index)}>
+                        <CloseIcon />
+                    </Close>
+                </Tag>
+            )}
+            <StyledInput type="text"
+                value={input}
+                onChange={(e) => onChange(e)}
                 onKeyDown={(e) => onKeyDown(e)}
                 placeholder="Add Tags" />
-        </div>
+        </TagsWrapper>
     )
 }
 

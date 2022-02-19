@@ -1,6 +1,6 @@
-import styles from './projectArticle.module.scss'
 import logo from '../../assets/share.svg'
 import useDocumentTitle from '../useDocumentTitle';
+import {AuthorImage,AuthorName,AuthorWrapper,ArticleInfo,ArticleWrapper,Image,Title,ImageWrapper,Container} from './ProjectArticleStyles'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 const ProjectArticle = (props) => {
@@ -30,36 +30,29 @@ const ProjectArticle = (props) => {
     }, [projectID])
     return (
         <>
-            <div className={styles.container}>
-                <div className={styles.title}>
+            <Container>
+                <Title>
                     {projectData.project_title}
-                </div>
-                <div className={styles.image}>
-                    <img src={logo} alt="" srcset="" />
-                </div>
-                <div className={styles.articleWrapper}>
-                    <div className={styles.authorWrapper}>
-                        <div className={styles.articleInfo}>
-                            <div className={styles.authorImage}>
+                </Title>
+                <ImageWrapper>
+                    <Image src={logo} alt="" srcset="" />
+                </ImageWrapper>
+                <ArticleWrapper>
+                    <AuthorWrapper>
+                        <ArticleInfo>
+                            <AuthorImage>
                                 <img src={logo} alt="" srcset="" />
-                            </div>
-                            <div className={styles.authorName}>
+                            </AuthorImage>
+                            <AuthorName>
                                 {projectData.owner}
-                            </div>
-                            <div className={styles.startedAt}>{new Date(projectData.created).toDateString()}</div>
-                        </div>
-                        <div className={styles.authorSocialMedia}>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                        </div>
-                    </div>
-                </div>
+                            </AuthorName>
+                            <div>{new Date(projectData.created).toDateString()}</div>
+                        </ArticleInfo>
+                    </AuthorWrapper>
+                </ArticleWrapper>
                 {projectData.project_desc}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque aut saepe pariatur nisi provident, recusandae explicabo natus id error obcaecati laborum qui accusamus at vel ipsa rem eaque ducimus iure.
-            </div>
+            </Container>
         </>
     )
 }

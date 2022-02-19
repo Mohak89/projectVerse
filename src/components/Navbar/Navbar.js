@@ -1,29 +1,13 @@
 import { useEffect, useState } from "react"
-import {
-    Link,
-} from "react-router-dom";
+// import {
+//     Link,
+// } from "react-router-dom";
+import { Close, NavbarSub, Overlay, Profile, Picture, Hamburger, MobileMenuItem, MobileMenu, MobileNavbar, Menu, MenuItem, BrandLogo, StyledLink, Navbar } from '../../styles/NavbarStyles'
+import { ReactComponent as Ham } from '../../assets/3_dots.svg'
 import { useAuth0 } from "@auth0/auth0-react";
-import styles from '../../styles/NavBar.module.scss'
-import { ReactComponent as Close } from '../../assets/close_black_24dp.svg'
+import styles from '../../styles/GeneralStyles.module.scss'
+import { ReactComponent as CloseIcon } from '../../assets/close_black_24dp.svg'
 
-const NavItem = (props) => {
-    return (
-        <Link to={props.to} className={props.active} onClick={props.click}>
-            <div className={props.classes}>
-                {props.ItemText}
-            </div>
-        </Link>
-    )
-}
-const HamBurger = (props) => {
-    return (
-        <div className={styles.hamburger} onClick={props.click}>
-            <div className={styles.bar}></div>
-            <div className={styles.bar}></div>
-            <div className={styles.bar}></div>
-        </div>
-    )
-}
 const NavBar = (props) => {
     const [isMobile, setMobileNavBar] = useState(false);
     const [isMenuVisible, setMenuVisible] = useState(false);
@@ -37,13 +21,13 @@ const NavBar = (props) => {
     useEffect(() => {
         if (width <= 780) {
             setMobileNavBar(true);
-            setMenuVisible(true)
+            setMenuVisible(false)
         }
         window.addEventListener('resize', () => {
             setWidth(window.innerWidth)
             if (width <= 780) {
                 setMobileNavBar(true);
-                setMenuVisible(true)
+                setMenuVisible(false)
             }
             else {
                 setMobileNavBar(false);
@@ -52,65 +36,61 @@ const NavBar = (props) => {
         })
     }, [width])
     const links = props.links
-    function getClass() {
-        if (!isMobile) {
-            return styles.mainMenu
-        }
-        else {
-            if (isMenuVisible) return styles.mobileMainMenu;
-            else return `${styles.mobileMainMenu} ${styles.activeMenu}`
-        }
-    }
     return (
         <>
-            {!isMobile && <div className={styles.navBar}>
-                <div className={styles.sub}>
-                    <div className={styles.logo}>projectVerse</div>
-                </div>
-                <div className={getClass()}>
+            {!isMobile && <Navbar>
+                <NavbarSub>
+                    <BrandLogo> projectVerse </BrandLogo>
+                </NavbarSub>
+                <Menu>
                     {links.map(link => (
-                        <NavItem
-                            to={link.to}
-                            key={link.key}
-                            ItemText={link.title}
-                            classes={styles.menuItem}
-                            click={handleClick} />
+                        <StyledLink to={link.to} onClick={handleClick}>
+                            <MenuItem>
+                                {link.title}
+                            </MenuItem>
+                        </StyledLink>
                     ))}
-                    {!isAuthenticated && <div onClick={() => loginWithRedirect()} className={styles.menuItem}>Login</div>}
+                    {!isAuthenticated && <MenuItem onClick={() => loginWithRedirect()}>Login</MenuItem>}
                     {isAuthenticated && <>
-                        <div className={styles.profile}>
-                            <img src={user.picture} alt={user.name} className={styles.picture} />
-                        </div>
+                        <Profile>
+                            <Picture src={user.picture} alt={user.name} className={styles.picture} />
+                        </Profile>
                     </>}
-                </div>
-            </div>
+                </Menu>
+            </Navbar>
             }
+
+
+
             {isMobile &&
-                <div className={`${styles.navBar} ${styles.mobileNavBar}`}>
-                    <div className={styles.sub}>
-                        <div className={styles.logo}>projectVerse</div>
-                        <HamBurger isMenuVisible={isMenuVisible} click={handleClick} />
-                    </div>
-                    {!isMenuVisible && <div className={styles.overlay}></div>}
-                    <div className={getClass()}>
-                        <div className={styles.logo}>projectVerse</div>
-                        <div onClick={handleClick} className={styles.close}><Close /></div>
+                <MobileNavbar>
+                    <NavbarSub>
+                        <BrandLogo> projectVerse </BrandLogo>
+                        <Hamburger onClick={handleClick} >
+                            <Ham />
+                        </Hamburger>
+                    </NavbarSub>
+                    {!isMenuVisible && <Overlay />}
+                    <MobileMenu isActive={isMenuVisible}>
+                        <BrandLogo> projectVerse </BrandLogo>
+                        <Close onClick={handleClick}>
+                            <CloseIcon />
+                        </Close>
                         {links.map(link => (
-                            <NavItem
-                                to={link.to}
-                                key={link.key}
-                                ItemText={link.title}
-                                classes={styles.menuItem}
-                                click={handleClick} />
+                            <StyledLink to={link.to} onClick={handleClick}>
+                                <MobileMenuItem>
+                                    {link.title}
+                                </MobileMenuItem>
+                            </StyledLink>
                         ))}
-                        {!isAuthenticated && <div onClick={() => loginWithRedirect()} className={styles.menuItem}>Login</div>}
-                        {isAuthenticated && <>
-                            <div className={styles.profile}>
-                                <img src={user.picture} alt={user.name} className={styles.picture} />
-                            </div>
-                        </>}
-                    </div>
-                </div>
+                        {!isAuthenticated && <MobileMenuItem onClick={() => loginWithRedirect()}>Login</MobileMenuItem>}
+                        {isAuthenticated && 
+                            <Profile>
+                                <Picture src={user.picture} alt={user.name} />
+                            </Profile>
+                        }
+                    </MobileMenu>
+                </MobileNavbar>
             }
         </>
     )

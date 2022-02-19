@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
-import AboutInnovator from "./Projetcs/AboutInnovator";
 import ShareButton from "./ShareButton";
 import Modal from "./Modal/Modal";
 import { useState } from "react";
@@ -16,7 +15,6 @@ const Home = () => {
         <Modal isOpen={isModalOpen} setModalState={() => setModal(false)}>
             Helllooo
         </Modal>
-            {/* <AboutInnovator /> */}
         </>
     );
 }

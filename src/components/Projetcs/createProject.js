@@ -1,4 +1,3 @@
-import styles from './createProject.module.scss'
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
@@ -9,6 +8,7 @@ import CodeTool from '@editorjs/code'
 import Underline from '@editorjs/underline';
 import FontSize from 'editorjs-inline-font-size-tool'
 import TagsInput from '../TagsInput/TagsInput';
+import { EditorContainer, Title, Input, Options, Select, Editor, Label } from './createProjectStyles';
 // import ImageTool from '@editorjs/image';
 
 import { useEffect, useRef, useState } from 'react';
@@ -36,7 +36,7 @@ const CreateProject = () => {
     const initEditor = () => {
         const editor = new EditorJS({
             data: editorData,
-            holder: `${styles.editorjs}`,
+            holder: 'editorjs',
             tools: {
                 image: {
                     class: SimpleImage,
@@ -93,25 +93,26 @@ const CreateProject = () => {
         })
     }
     return (
-        <div className={styles.createContainer}>
-            <div className={styles.title}>
-                <input placeholder={"Title"} />
-            </div>
-            <div id={styles.editorjs} />
-            <div className={styles.options}>
-                <label htmlFor="category">Category</label>
-                <select name="" id="category">
+        <EditorContainer>
+            <Title>
+                <Input placeholder={"Title"} />
+            </Title>
+            <Editor id="editorjs" />
+            <Options>
+                <Label htmlFor="category">Category</Label>
+                <Select name="" id="category">
                     <option value="Entertainment"> Entertainment</option>
                     <option value="Coding">Coding</option>
                     <option value="Hardware">Hardware</option>
                     <option value="I dont know why im doing">I dont know why im doing</option>
-                </select>
-            </div>
+                </Select>
+            </Options>
             <TagsInput tags={tags} setTags={setTags} />
             <button onClick={() => {
                 console.log(editorData);
             }}>click me</button>
-        </div>
+        </EditorContainer>
+
     )
 }
 export default CreateProject

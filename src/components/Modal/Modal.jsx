@@ -1,21 +1,21 @@
 import { useCallback, useEffect } from 'react';
 import ReactDom from 'react-dom'
-import {ReactComponent as Close} from '../../assets/close_black_24dp.svg'
-import styles from './Modal.module.scss'
+import {ReactComponent as CloseIcon} from '../../assets/close_black_24dp.svg'
+import {ModalBox,ModalWrapper,Close} from './ModalStyle'
 
 const Modal = ({ isOpen, setModalState, children }) => {
     if (!isOpen) return null;
     
     return ReactDom.createPortal(
         <>
-            <div className={styles.ModalWrapper}>
-                <div className={styles.ModalBox}>
-                    <button className={styles.close} onClick={()=>setModalState(false)}>
-                        <Close/>
-                    </button>
+            <ModalWrapper>
+                <ModalBox>
+                    <Close onClick={()=>setModalState(false)}>
+                        <CloseIcon/>
+                    </Close>
                     {children}
-                </div>
-            </div>
+                </ModalBox>
+            </ModalWrapper>
         </>,
         document.getElementById("modal")
     )
