@@ -1,10 +1,14 @@
+from cgitb import lookup
 from django import views
 from rest_framework import status
 from rest_framework import permissions, generics
+from django.http import JsonResponse
 
 from rest_framework.decorators import api_view, permission_classes # new
 from rest_framework.response import Response # new
 from rest_framework.reverse import reverse # new
+
+from django.shortcuts import get_list_or_404, get_object_or_404 #new----------------
 
 from authentication.models import User
 from projects.models import Project
@@ -35,16 +39,23 @@ class ProjectList(generics.ListCreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,) # new
+    
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
 
 # listing details of a Project using 'RetrieveUpdateDestroyAPIView'
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
+    # queryset = get_list_or_404(Project.objects.all())
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly) # new
+    lookup_field = 'id'
 
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Project, id = id_)
+        # return JsonResponse(status=404, data={'status':'false','message':message})
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
@@ -57,6 +68,30 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly) # new
 
+
+class UserProjectsList(generics.ListCreateAPIView):
+    # queryset = User.objects.get()
+    serializer_class = ProjectSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,) # new
+
+    def get_queryset(self):
+        try:
+            return get_object_or_404(Project.objects.filter(owner=self.kwargs.get("pk")))
+        except Project.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    # def get_object_list(self):
+    #     try:
+    #         return Project.objects.filter(owner=self.kwargs.get("pk"))
+    #     except Project.DoesNotExist:
+    #         return Response(status=status.HTTP_404_NOT_FOUND)
+        # id_ = self.kwargs.get("pk")
+        # return get_list_or_404(Project, id = id_)
+
+    
+    
+    # def get_object(self):
+        
 
 # ---------------------------------------------------------------------------------------
 # class UserViewSet(viewsets.ModelViewSet):

@@ -16,7 +16,7 @@ class Project(models.Model):
     project_desc    = models.CharField(max_length=200)
     project_link    = models.URLField(blank=True, null=True)
     project_status  = models.CharField(max_length=12, choices=status, default='active',blank=True, null=True)
-    # project_thumbnail = models.ImageField()
+    # project_img = models.FileField(verbose_name="Project Image", upload_to="projects/")
     class Meta:
         ordering = ('created',)
 
