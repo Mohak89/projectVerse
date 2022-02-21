@@ -4,6 +4,11 @@ from authentication.models import User
 
 from projects.models import Project
 
+# --------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
+
+
+# PROJECT SERIALIZER
 class ProjectSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source = 'owner.username')
     class Meta:
@@ -11,9 +16,15 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = "__all__"
         lookup_field = 'id'
 
+# USER SERIALIZER (with project-list)
 class UserSerializer(serializers.ModelSerializer):
-    # the 'snippet' adds the primarykey realation of one 'user' to many 'SNIPPETS'
-    project_list    = serializers.PrimaryKeyRelatedField(many=True, queryset=Project.objects.all())
+    '''
+        -> adding project list to the user serializer
+        -> the 'project_list' adds the primarykey realation of one 'user' to many 'PROJECTS'
+    '''
+    project_list    = serializers.PrimaryKeyRelatedField(many=True, 
+                                                         queryset=Project.objects.all()
+                                                        )  
     class Meta:
         model       = User
         fields      =('id', 'username', 'project_list')

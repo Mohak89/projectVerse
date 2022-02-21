@@ -2,12 +2,12 @@ from django.db import models
 from authentication.models import User
 # Create your models here.
 
-
+# PROJECT BASE MODEL
 class Project(models.Model):
     status = (
         ('active', 'active'),
-        ('Completed', 'Complete'),
-        ('JAI', 'Just An Idea'),
+        ('completed', 'Complete'),
+        ('jai', 'Just An Idea'),
     )
     id              = models.BigAutoField(primary_key=True)
     created         = models.DateTimeField(auto_now_add=True, null=True)
