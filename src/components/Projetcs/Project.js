@@ -1,14 +1,13 @@
 import styles from '../../styles/projects.module.scss'
 
 import { useEffect, useState } from "react";
-import img from '../../logo.svg'
 import axios from 'axios'
 import useDocumentTitle from "../useDocumentTitle";
-import { ReactComponent as Share } from '../../assets/share.svg'
+import { ReactComponent as Share } from 'assets/share.svg'
 import { Link } from 'react-router-dom';
-import { ReactComponent as Bookmark } from '../../assets/bookmark_border_black_24dp.svg'
-import { ReactComponent as Like } from '../../assets/thumb_up_alt_black_24dp.svg'
-import { ReactComponent as View } from '../../assets/visibility_black_24dp.svg'
+import { ReactComponent as Bookmark } from 'assets/bookmark_border_black_24dp.svg'
+import { ReactComponent as Like } from 'assets/thumb_up_alt_black_24dp.svg'
+import { ReactComponent as View } from 'assets/visibility_black_24dp.svg'
 //Project Card Component
 const ProjectCard = (props) => {
     return (
@@ -68,7 +67,7 @@ const Projects = () => {
     useEffect(() => {
         projectAPI();
         console.log(projectData)
-    }, [projectData])
+    }, [])
 
     // const projectData = [
     //     {

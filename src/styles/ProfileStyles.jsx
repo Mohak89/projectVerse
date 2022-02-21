@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const WrapperContainer = styled.div`
-    padding-top: 1rem;
+    padding-top: 0rem;
 `
 const BannerWrapper = styled.div`
     height: 230px;  

@@ -15,6 +15,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
+    "copy-to-clipboard": "^3.3.1",
     "cors": "^2.8.5",
     "draft-js": "^0.11.7",
     "helmet": "^5.0.2",
@@ -57,6 +58,7 @@
   "devDependencies": {
     "@editorjs/code": "^2.7.0",
     "@editorjs/image": "^2.6.2",
+    "@editorjs/marker": "^1.2.2",
     "editorjs-inline-font-size-tool": "^1.0.1"
   }
 }

@@ -16,6 +16,7 @@ const Title = styled.div`
     left: 0;
     right: 0;
     margin: auto;
+    outline:none;
     box-sizing: border-box;
 `
 const Input = styled.input`

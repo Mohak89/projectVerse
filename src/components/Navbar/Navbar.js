@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-// import {
+// import 
 //     Link,
 // } from "react-router-dom";
 import { Close, NavbarSub, Overlay, Profile, Picture, Hamburger, MobileMenuItem, MobileMenu, MobileNavbar, Menu, MenuItem, BrandLogo, StyledLink, Navbar } from '../../styles/NavbarStyles'
-import { ReactComponent as Ham } from '../../assets/3_dots.svg'
+import { ReactComponent as Ham } from 'assets/3_dots.svg'
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from '../../styles/GeneralStyles.module.scss'
-import { ReactComponent as CloseIcon } from '../../assets/close_black_24dp.svg'
+import { ReactComponent as CloseIcon } from 'assets/close_black_24dp.svg'
 
 const NavBar = (props) => {
     const [isMobile, setMobileNavBar] = useState(false);

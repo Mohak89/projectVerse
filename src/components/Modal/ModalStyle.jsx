@@ -6,29 +6,26 @@ const ModalWrapper = styled.div`
     position: fixed;
     top:0;
 `
-const grow = keyframes`
-0%{
-    width:0;
-    height: 0;
-}
-100%{
-    width:60%;
-    height: 60%;
-}
-`
+
 const ModalBox = styled.div`
     position:absolute;
-    top:50%;
+    top:${props=>props.isMobile? 'auto' : '50%'};
+    bottom:${props=>props.isMobile?'0':''};
     left: 50%;
-    transform: translate(-50%,-50%);
-    width:60%;
-    height: 60%;
+    ${props=>props.isMobile?'transform: translatex(-50%)':'transform: translate(-50%,-50%)'};
+    width:${props=>props.isMobile ? '100%' : '80%'};
+    height: max-content;
     display: flex;
     flex-direction: column;
-    border-radius: 80px 0px 80px 0px;
+    border-radius: ${props=>props.isMobile?'20px 20px 0px 0px':'20px'};
     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.295),-2px -2px 20px rgba(0, 0, 0, 0.295);
-    background:linear-gradient(145deg,cyan,purple);
-    animation: ${grow} 0.2s ;
+    background:white;
+`
+const MobileModalBox = styled(ModalBox)`
+    top:auto;
+    bottom:0;
+    left: 50%;
+    transform: translatex(-50%);
 `
 const Close = styled.button`
     background: none;
@@ -37,5 +34,6 @@ const Close = styled.button`
     height: max-content;
     display: flex;
     justify-content: end;
+    padding: 1rem;
 `
-export {ModalWrapper,ModalBox,Close}
+export {ModalWrapper,ModalBox,Close,MobileModalBox}

@@ -24,7 +24,8 @@ function App() {
         {links.map(link => {
           return <Route exact path={link.to} key={link.key} element={link.component} />
         })}
-        <Route path={'project/:id'} element={<ProjectArticle />} />
+        <Route path={'innovator/:username'} element={<Profile/>} />
+        <Route path={'innovator/:username/:id'} element={<ProjectArticle />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router >

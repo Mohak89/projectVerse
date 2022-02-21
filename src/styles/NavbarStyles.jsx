@@ -77,7 +77,7 @@ const MobileMenuItem = styled.div`
 const Close = styled.div`
     position: absolute;
     right: 1rem;
-    top:28px;
+    top:20px;
 `
 const Profile = styled.div`
     padding-right: 1rem;

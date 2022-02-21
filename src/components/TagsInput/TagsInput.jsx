@@ -1,4 +1,4 @@
-import { ReactComponent as CloseIcon } from '../../assets/close_black_24dp.svg'
+import { ReactComponent as CloseIcon } from 'assets/close_black_24dp.svg'
 import { useState } from 'react';
 import { Close, TagsWrapper, Tag, StyledInput } from './TagsInputStyles'
 
