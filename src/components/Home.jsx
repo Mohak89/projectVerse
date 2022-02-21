@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
-import AboutInnovator from "./Projetcs/AboutInnovator";
-import ShareButton from "./ShareButton";
 import Modal from "./Modal/Modal";
 import { useState } from "react";
+import ShareContainer from "./ShareContainer/ShareContainer";
 
 const Home = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
@@ -13,10 +11,9 @@ const Home = () => {
     return (
         <>
         <button onClick={()=>setModal(true)}>Click me</button>
-        <Modal isOpen={isModalOpen} setModalState={() => setModal(false)}>
-            Helllooo
-        </Modal>
-            {/* <AboutInnovator /> */}
+        {/* <Modal isMobile={true} isOpen={isModalOpen} setModalState={() => setModal(false)}>
+        <ShareContainer/>
+        </Modal> */}
         </>
     );
 }

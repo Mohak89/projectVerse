@@ -8,5 +8,6 @@
 }
 
 * {
+  box-sizing: border-box;
   font-family: 'PT Sans Narrow', sans-serif;
 }

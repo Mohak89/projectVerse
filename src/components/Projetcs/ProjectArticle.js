@@ -1,13 +1,15 @@
-import styles from './projectArticle.module.scss'
-import logo from '../../assets/share.svg'
+import logo from 'assets/share.svg'
 import useDocumentTitle from '../useDocumentTitle';
+import { AuthorImage, AuthorName, AuthorWrapper, ArticleInfo, ArticleWrapper, Image, Title, ImageWrapper, Container } from './ProjectArticleStyles'
 import { useEffect, useState } from 'react';
+import NotFound from '../NotFound'
 import axios from 'axios';
 const ProjectArticle = (props) => {
     const [projectData, setData] = useState([])
-    const projectID = window.location.pathname.replace('/project/','')
+    const [exist, setExist] = useState(false)
+    const projectID = window.location.pathname.replace('/project/', '')
     console.log(projectID)
-    const projectAPI = async() => {
+    const projectAPI = async () => {
         try {
             const data = await axios({
                 method: "GET",
@@ -17,8 +19,11 @@ const ProjectArticle = (props) => {
                     'Content-Type': 'application/json;charset=UTF-8',
                 }
             })
-            setData(data.data)
-            
+            if (!data || data.status !== 200) {
+                setExist(false)
+            }
+            else setData(data.data)
+
         } catch (error) {
             console.error(error);
             return error
@@ -27,39 +32,34 @@ const ProjectArticle = (props) => {
     useEffect(() => {
         projectAPI();
         console.log(projectData)
-    }, [projectID])
+    }, [projectID,exist])
     return (
         <>
-            <div className={styles.container}>
-                <div className={styles.title}>
+            {exist && <Container>
+                <Title>
                     {projectData.project_title}
-                </div>
-                <div className={styles.image}>
-                    <img src={logo} alt="" srcset="" />
-                </div>
-                <div className={styles.articleWrapper}>
-                    <div className={styles.authorWrapper}>
-                        <div className={styles.articleInfo}>
-                            <div className={styles.authorImage}>
+                </Title>
+                <ImageWrapper>
+                    <Image src={logo} alt="" srcset="" />
+                </ImageWrapper>
+                <ArticleWrapper>
+                    <AuthorWrapper>
+                        <ArticleInfo>
+                            <AuthorImage>
                                 <img src={logo} alt="" srcset="" />
-                            </div>
-                            <div className={styles.authorName}>
+                            </AuthorImage>
+                            <AuthorName>
                                 {projectData.owner}
-                            </div>
-                            <div className={styles.startedAt}>{new Date(projectData.created).toDateString()}</div>
-                        </div>
-                        <div className={styles.authorSocialMedia}>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                            <div className={styles.media}>F</div>
-                        </div>
-                    </div>
-                </div>
+                            </AuthorName>
+                            <div>{new Date(projectData.created).toDateString()}</div>
+                        </ArticleInfo>
+                    </AuthorWrapper>
+                </ArticleWrapper>
                 {projectData.project_desc}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque aut saepe pariatur nisi provident, recusandae explicabo natus id error obcaecati laborum qui accusamus at vel ipsa rem eaque ducimus iure.
-            </div>
+            </Container>
+            }
+            {!exist && <NotFound/>}
         </>
     )
 }
