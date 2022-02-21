@@ -76,7 +76,7 @@ class UserProjectsList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         try:
-            return get_object_or_404(Project.objects.filter(owner=self.kwargs.get("pk")))
+            return get_list_or_404(Project.objects.filter(owner=self.kwargs.get("pk")))
         except Project.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
     
