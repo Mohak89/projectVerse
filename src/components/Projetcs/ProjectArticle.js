@@ -1,17 +1,17 @@
-import logo from 'assets/share.svg'
-import useDocumentTitle from '../useDocumentTitle';
+// import useDocumentTitle from '../useDocumentTitle';
 import { AuthorImage, AuthorName, AuthorWrapper, ArticleInfo, ArticleWrapper, Image, Title, ImageWrapper, Container } from './ProjectArticleStyles'
-import { useEffect, useState } from 'react';
 import NotFound from '../NotFound'
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Editor from './Editor';
+import 'styles/GeneralStyles.scss'
 const ProjectArticle = (props) => {
-    const [projectData, setData] = useState([])
-    const [exist, setExist] = useState(false)
-    const projectID = window.location.pathname.replace('/project/', '')
-    console.log(projectID)
+    const [projectData, setData] = useState()
+    const { projectID } = useParams();
     const projectAPI = async () => {
         try {
-            const data = await axios({
+            const response = await axios({
                 method: "GET",
                 url: `http://127.0.0.1:8000/api/projects/${projectID}/?format=json`,
                 headers: {
@@ -19,11 +19,8 @@ const ProjectArticle = (props) => {
                     'Content-Type': 'application/json;charset=UTF-8',
                 }
             })
-            if (!data || data.status !== 200) {
-                setExist(false)
-            }
-            else setData(data.data)
-
+            setData(response.data)
+            console.log(response.data)
         } catch (error) {
             console.error(error);
             return error
@@ -31,22 +28,23 @@ const ProjectArticle = (props) => {
     }
     useEffect(() => {
         projectAPI();
-        console.log(projectData)
-    }, [projectID,exist])
+        // projectData && useDocumentTitle(projectData.project_title)
+        // window.history.replaceState('My new page title',`http://localhost:3000/${projectData.owner}/${projectID}`)
+    }, [projectID])
     return (
         <>
-            {exist && <Container>
+            {projectData && <Container>
                 <Title>
                     {projectData.project_title}
                 </Title>
                 <ImageWrapper>
-                    <Image src={logo} alt="" srcset="" />
+                    {/* <Image src={logo} alt="" srcset="" /> */}
                 </ImageWrapper>
                 <ArticleWrapper>
                     <AuthorWrapper>
                         <ArticleInfo>
                             <AuthorImage>
-                                <img src={logo} alt="" srcset="" />
+                                {/* <img src={logo} alt="" srcset="" /> */}
                             </AuthorImage>
                             <AuthorName>
                                 {projectData.owner}
@@ -55,11 +53,10 @@ const ProjectArticle = (props) => {
                         </ArticleInfo>
                     </AuthorWrapper>
                 </ArticleWrapper>
-                {projectData.project_desc}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque aut saepe pariatur nisi provident, recusandae explicabo natus id error obcaecati laborum qui accusamus at vel ipsa rem eaque ducimus iure.
+                <Editor readOnly initialData={JSON.parse(projectData.project_desc)} />
             </Container>
             }
-            {!exist && <NotFound/>}
+            {!projectData && <NotFound />}
         </>
     )
 }

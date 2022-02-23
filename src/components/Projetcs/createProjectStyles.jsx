@@ -25,9 +25,10 @@ const Input = styled.input`
     width: 100%;
     font-size: 32px;
     font-weight: bold;
+    outline: none;
 `
 
-const Editor = styled.div`
+const EditorWrapper = styled.div`
     width: 100%;
 `
 
@@ -42,4 +43,4 @@ const Label = styled.label`
 const Select = styled.select`
     margin-right: 4px;
 `
-export { EditorContainer,Editor,Title,Input,Label,Options,Select }
+export { EditorContainer,EditorWrapper,Title,Input,Label,Options,Select }
