@@ -8,12 +8,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Profile from './components/Profile/Profile'
 import Home from './components/Home';
+import ExploreProjects from 'components/Projetcs/ExploreProjects';
 
 function App() {
   const links = [
     { to: '/', title: 'Home', component: <Home/>, key: uuidv4() },
-    { to: '/explore', title: 'Explore', component: <Projects />, key: uuidv4() },
-    { to: '/profile', title: 'Profile', component: <Profile/>, key: uuidv4() },
+    { to: '/explore', title: 'Explore', component: <ExploreProjects />, key: uuidv4() },
     { to: '/create', title: 'Create', component: <CreateProject />, key: uuidv4() }
 ]
   return (
@@ -24,8 +24,8 @@ function App() {
         {links.map(link => {
           return <Route exact path={link.to} key={link.key} element={link.component} />
         })}
-        <Route path={'innovator/:username'} element={<Profile/>} />
-        <Route path={'innovator/:username/:id'} element={<ProjectArticle />} />
+        <Route path={':username'} element={<Profile/>} />
+        <Route path={':username/:projectID'} element={<ProjectArticle />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router >

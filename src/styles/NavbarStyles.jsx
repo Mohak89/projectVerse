@@ -4,13 +4,13 @@ const Navbar = styled.div`
      display: flex;
     flex-direction: row;
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     left: 0;
     right: 0;
     font-size: 1.2rem;
     justify-content: space-between;
+    box-shadow:4px 4px 20px silver;
     // background: linear-gradient(290deg, #e6b2ff, #58fff2);
-    border-radius: 20px;
     box-sizing: border-box;
     z-index: 1000;
 `
@@ -22,6 +22,8 @@ display: flex;
 const StyledLink = styled(Link)`
     text-decoration: none;
     color: black;
+    display:grid;
+    place-items:center;
     &:visited{
         color: black;
     }

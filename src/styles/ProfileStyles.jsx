@@ -67,13 +67,17 @@ const MediaWrapper = styled.div`
     grid-template-columns: 1fr auto 1fr;
     column-gap: 24px;
 `
-const Media = styled.div`
+const Media = styled.a`
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: end;
     font-size: 30px;
     justify-content: flex-end;
+    svg{
+        height:2rem;
+        width:2rem;
+    }
 `
 const VerticalSeprator = styled.div`
     height: 100%;
@@ -88,7 +92,6 @@ align-items: center;
 padding: 0px 8px;
 justify-content: end;
 width: 100%;
-position: sticky;
 box-sizing: border-box;
 top: 72px;
 z-index: 50;

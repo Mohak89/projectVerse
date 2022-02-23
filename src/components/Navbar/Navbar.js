@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import { Close, NavbarSub, Overlay, Profile, Picture, Hamburger, MobileMenuItem, MobileMenu, MobileNavbar, Menu, MenuItem, BrandLogo, StyledLink, Navbar } from '../../styles/NavbarStyles'
 import { ReactComponent as Ham } from 'assets/3_dots.svg'
 import { useAuth0 } from "@auth0/auth0-react";
-import styles from '../../styles/GeneralStyles.module.scss'
 import { ReactComponent as CloseIcon } from 'assets/close_black_24dp.svg'
 
 const NavBar = (props) => {
@@ -14,7 +13,6 @@ const NavBar = (props) => {
     const [width, setWidth] = useState(window.innerWidth);
     const handleClick = () => {
         setMenuVisible(!isMenuVisible)
-        document.body.classList.add(styles.noscroll)
     }
     const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
@@ -23,7 +21,7 @@ const NavBar = (props) => {
             setMobileNavBar(true);
             setMenuVisible(false)
         }
-        window.addEventListener('resize', () => {
+        const func = () =>{
             setWidth(window.innerWidth)
             if (width <= 780) {
                 setMobileNavBar(true);
@@ -33,7 +31,9 @@ const NavBar = (props) => {
                 setMobileNavBar(false);
                 setMenuVisible(false)
             }
-        })
+        }
+        window.addEventListener('resize', () => func)
+        return window.removeEventListener('resize',func)
     }, [width])
     const links = props.links
     return (
@@ -53,7 +53,7 @@ const NavBar = (props) => {
                     {!isAuthenticated && <MenuItem onClick={() => loginWithRedirect()}>Login</MenuItem>}
                     {isAuthenticated && <>
                         <Profile>
-                            <Picture src={user.picture} alt={user.name} className={styles.picture} />
+                            <Picture src={user.picture} alt={user.name} />
                         </Profile>
                     </>}
                 </Menu>
