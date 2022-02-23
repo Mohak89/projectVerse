@@ -1,73 +1,55 @@
-import styles from '../../styles/projects.module.scss'
-
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import axios from 'axios'
 import useDocumentTitle from "../useDocumentTitle";
-import { ReactComponent as Share } from 'assets/share.svg'
-import { Link } from 'react-router-dom';
-import { ReactComponent as Bookmark } from 'assets/bookmark_border_black_24dp.svg'
-import { ReactComponent as Like } from 'assets/thumb_up_alt_black_24dp.svg'
-import { ReactComponent as View } from 'assets/visibility_black_24dp.svg'
+import { ProjectCard, SkeletonCard } from "./Cards";
+// import {useInView} from 'react-intersection-observer'
+const ProjectsContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 2rem;
+`
 //Project Card Component
-const ProjectCard = (props) => {
-    return (
-        <div className={styles.card}>
-            {/* <div className={styles.share}> <Share fill="black" width="100%" height="100%" /></div> */}
-            <div className={styles.cardWrapper}>
-                <Link className={styles.imageContainer} to={`/project/${props.link}`} target={'_blank'} >
-                    <img src={props.image} alt="" className={styles.image} />
-                </Link>
-                <div className={styles.cardBody}>
-                    <div className={styles.cardText}>{props.author}</div>
-                    <div className={styles.cardText}>{props.createdAt}</div>
-                    <div className={styles.title}>{props.title}</div>
-                    <div className={styles.cardText}>{props.discription}</div>
-                </div>
-                <div className={styles.projectMoreInfo}>
-                    <div className={styles.projectStats}>
-                        <div className={styles.likes}>
-                            <Like />
-                            {props.likes}
-                        </div>
-                        <div className={styles.views}>
-                            <View />
-                            {props.views}
-                        </div>
-                    </div>
-                    <div className={styles.bookmark}>
-                        <Bookmark />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    )
-}
 
 
-const Projects = () => {
+
+const Projects = ({ url }) => {
     useDocumentTitle('Projects')
-    const [projectData, setData] = useState([])
-    const projectAPI = async() => {
+    const [projectData, setData] = useState(null)
+    const [nextURL,setNextURL] = useState(null)
+    const projectAPI = async (dataURL) => {
         try {
             const data = await axios({
                 method: "GET",
-                url: "http://127.0.0.1:8000/api/projects/?format=json",
+                url: dataURL,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json;charset=UTF-8',
                 }
             })
-            setData(data.data.results)
+            setData((prevState)=>{
+                if(prevState===null) return data.data.results
+                return [...prevState,...data.data.results]
+            })
+            setNextURL(data.data.next)
         } catch (error) {
             console.error(error);
             return error
         }
     }
+    useEffect(()=>{
+        if(!projectData) projectAPI(url)
+    },[projectData,url])
     useEffect(() => {
-        projectAPI();
-        console.log(projectData)
-    }, [])
+        if(nextURL===null) return
+        projectAPI(nextURL)
+    }, [nextURL])
 
     // const projectData = [
     //     {
@@ -155,22 +137,28 @@ const Projects = () => {
     //     }
     // ]
     return (
-        <div className={styles.projects} >
-            {projectData.map((element) => (
-                <ProjectCard 
-                    key={element.id} 
-                    link={element.id} 
-                    image={"https://hackster.imgix.net/uploads/attachments/1315695/_uFAv7dW5nX.blob?auto=compress%2Cformat&w=350&h=262.5&fit=min&dpr=1.3020833730697632"} 
-                    likes={0} 
-                    views={0} 
-                    author={element.owner} 
-                    created={new Date(element.created).toDateString()} 
-                    title={element.project_title} 
+        <ProjectsContainer>
+            {projectData ? projectData.map((element) => (
+                <ProjectCard
+                    key={element.id}
+                    link={element.id}
+                    image={"https://hackster.imgix.net/uploads/attachments/1315695/_uFAv7dW5nX.blob?auto=compress%2Cformat&w=350&h=262.5&fit=min&dpr=1.3020833730697632"}
+                    likes={0}
+                    views={0}
+                    author={element.owner}
+                    createdAt={new Date(element.created).toDateString()}
+                    title={element.project_title}
                     status={element.project_status}
                     discription={element.discription} />
-            ))}
-        </div>
+            )) :
+                <>
+                    <SkeletonCard />
+                    <SkeletonCard />
+                    <SkeletonCard />
+                    <SkeletonCard />
+                </>}
+        </ProjectsContainer>
     )
 }
-
+export { ProjectCard }
 export default Projects;
