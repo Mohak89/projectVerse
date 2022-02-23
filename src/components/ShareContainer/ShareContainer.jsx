@@ -8,6 +8,7 @@ import { useState } from 'react'
 const ShareContainer = () => {
     const [isCopied,setCopied] = useState(false)
     const URL = 'https://projectverse.com/Sanitheway'
+    const Text='This is a good world'
     return (
         <Container>
             <ShareText>
@@ -24,10 +25,10 @@ const ShareContainer = () => {
                 <MediaBox href={`https://www.linkedin.com/sharing/share-offsite/?url=${URL}`} rel={'noopener noreferrer'} target={'_blank'}>
                     <Linkedin />
                 </MediaBox>
-                <MediaBox href={`https://www.linkedin.com/sharing/share-offsite/?url=https://api.whatsapp.com/send?text=Take a look at my profile. ${URL}`} rel={'noopener noreferrer'} target={'_blank'}>
+                <MediaBox href={`https://api.whatsapp.com/send?text=${Text}&${URL}`} rel={'noopener noreferrer'} target={'_blank'}>
                     <Whatsapp />
                 </MediaBox>
-                <MediaBox href={`https://www.linkedin.com/sharing/share-offsite/?url=${URL}`} rel={'noopener noreferrer'} target={'_blank'}>
+                <MediaBox href={`https://twitter.com/intent/tweet?text=${Text}&url=${URL}`} rel={'noopener noreferrer'} target={'_blank'}>
                     <Twitter />
                 </MediaBox>
             </SocialMediaWrapper>

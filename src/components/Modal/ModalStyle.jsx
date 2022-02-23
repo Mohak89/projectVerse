@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components'
 const ModalWrapper = styled.div`
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.548);
+    /* background-color: rgba(0, 0, 0, 0.548); */
     position: fixed;
     top:0;
 `
@@ -29,11 +29,17 @@ const MobileModalBox = styled(ModalBox)`
 `
 const Close = styled.button`
     background: none;
+    position:absolute;
+    right: 0;
     border: none;
     cursor: pointer;
-    height: max-content;
-    display: flex;
-    justify-content: end;
     padding: 1rem;
 `
-export {ModalWrapper,ModalBox,Close,MobileModalBox}
+const Overlay = styled.div`
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: inherit;
+    background-color: rgba(189, 187, 187, 0.295);
+`
+export {ModalWrapper,ModalBox,Close,MobileModalBox,Overlay}
