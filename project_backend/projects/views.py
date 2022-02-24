@@ -1,6 +1,7 @@
+from http.client import HTTPResponse
 from rest_framework import status
+from django.http import Http404, HttpResponseNotFound
 from rest_framework import permissions, generics
-
 from rest_framework.decorators import api_view, permission_classes # new
 from rest_framework.response import Response # new
 from rest_framework.reverse import reverse # new
@@ -67,19 +68,29 @@ class UserDetail(generics.RetrieveAPIView):
 
 # USER SPECIFIC - PROJECTS LIST
 class UserProjectsList(generics.ListCreateAPIView):
-    # queryset = User.objects.get()
+    # queryset = User.objects.all()
     serializer_class = ProjectSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,) # new
-
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly) # new
+    
     def get_queryset(self):
         try:
             return get_list_or_404(Project.objects.filter(owner=self.kwargs.get("pk")))
         except Project.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    # def get_object_list(self):
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    # def get_object(self):
+    #     obj_list = list(Project.objects.filter(owner=self.kwargs.get("pk")))
+    #     if not obj_list:
+    #         raise Http404("not found.")
+
+    # def get_queryset(self):
     #     try:
-    #         return Project.objects.filter(owner=self.kwargs.get("pk"))
+    #         project_list = list(Project.objects.filter(owner=self.kwargs.get("pk")))
+    #         if len(project_list) != 0:
+    #             return project_list
     #     except Project.DoesNotExist:
     #         return Response(status=status.HTTP_404_NOT_FOUND)
         # id_ = self.kwargs.get("pk")

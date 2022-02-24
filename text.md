@@ -11,7 +11,7 @@
   -- ViewSet
   -- APIVIEW
   -- Mixin Views
-  -- GenericView - DRF provides a set of already mixed-in generic views that we can use to trim down our views.py module even more.
+  -- GenericView - DRF provides a set of already mixed-in generic views that we can use to trim down our views.py module even more. <<DRY>>
 
 - Serializers:
   -- **Serializer** - here we make whole serializer from scratch like the 'model'
