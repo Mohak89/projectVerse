@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'rest_framework',
+    'oauth2_provider',
 
     # OWN Apps
     'authentication',
@@ -64,23 +65,42 @@ CORS_ORIGIN_WHITELIST = (
   'http://localhost:3000',
 )
 # Rest Framework
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-        # 'PAGE_SIZE': 3
-    ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework.authentication.BasicAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    # ]
-}
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': 
+#     ,
+#     # 'DEFAULT_AUTHENTICATION_CLASSES': [
+#     #     'rest_framework.authentication.BasicAuthentication',
+#     #     'rest_framework.authentication.SessionAuthentication',
+#     # ]
+# }
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
+
+REST_FRAMEWORK = {
+    # ...
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
 ROOT_URLCONF = 'project_backend.urls'
 
 TEMPLATES = [

@@ -1,6 +1,4 @@
-from http.client import HTTPResponse
 from rest_framework import status
-from django.http import Http404, HttpResponseNotFound
 from rest_framework import permissions, generics
 from rest_framework.decorators import api_view, permission_classes # new
 from rest_framework.response import Response # new
@@ -17,13 +15,18 @@ from projects.permissions import IsOwnerOrReadOnly
 # --------------------------------------------------------------------------------------------------------
 
 
-# API ROOT
+'''
+API ROOT
+- The Root page of APIs
+
+Uses Function based Views
+'''
 @api_view(['GET']) # new
 @permission_classes((permissions.AllowAny,))
 def api_root(request, format=None):
     # permission_class = [permissions.AllowAny,]
     return Response({
-        'users': reverse('user_list', request=request, format=format),
+        # 'users': reverse('user_list', request=request, format=format),
         'projects': reverse('project_list', request=request, format=format)
     })
 
@@ -53,18 +56,23 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 # ALL USERS LIST VIEW
+# -- Shifted to Authentication APP
+
+'''
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,) # new
 
-
+'''
 # USER DETAIL VIEW
+# -- Shifted to Authentication APP
+'''
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly) # new
-
+'''
 
 # USER SPECIFIC - PROJECTS LIST
 class UserProjectsList(generics.ListCreateAPIView):
