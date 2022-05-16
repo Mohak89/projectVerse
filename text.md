@@ -25,3 +25,18 @@
 The only way for the server to know who the user is when The front end of the website will send a “Token” with every request to the backend.
 This “Token” is used by the backend to authenticate a user and authorize them to access different features.
 _Django REST Framework settings_:
+|
+|
+|
+|
+|
+
+<!-- ------------------------------- -->
+
+## What is Token Authentication?
+
+- The authentication token helps to transmit users data between application and website.
+- Allow users to enter their username and password in order to obtain a token which allows them to fetch a specific resource - without using their username and password each time for a specific amount of time.
+  -Once their token has been obtained, the user can offer the token - which offers access to a specific resource for a time period - to the remote site.
+
+`there is a difference between Token and session`
